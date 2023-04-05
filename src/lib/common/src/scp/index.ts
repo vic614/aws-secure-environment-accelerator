@@ -62,7 +62,7 @@ export class ServiceControlPolicy {
     let policyId = getPolicyByName?.PolicySummary?.Id!;
     if (policyId) {
       console.log(`Updating policy ${policyName}`);
-      if (getPolicyByName?.Content !== policyContent) {
+      if (getPolicyByName?.Content === undefined) {
         await this.org.updatePolicy({
           policyId,
           content: policyContent,
@@ -378,6 +378,7 @@ export class ServiceControlPolicy {
                 `arn:aws:iam::*:role/${props.organizationAdminRole || 'AWSCloudFormationStackSetExecutionRole'}`,
                 `arn:aws:iam::*:role/${props.acceleratorPrefix}*`,
                 'arn:aws:iam::*:role/aws*',
+                'arn:aws:iam::*:role/stacksets-exec*'
               ],
             },
           },
