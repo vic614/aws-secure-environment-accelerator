@@ -263,7 +263,7 @@ export class CdkToolkit {
           this.deploymentLog(stack, 'Disabling termination protection');
           await cfn
             .updateTerminationProtection({
-              StackName: stack.id,
+              StackName: stack.stackName,
               EnableTerminationProtection: false,
             })
             .promise();
