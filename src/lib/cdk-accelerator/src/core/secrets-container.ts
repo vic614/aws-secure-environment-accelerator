@@ -49,7 +49,7 @@ export class SecretsContainer extends Construct {
 
   constructor(scope: Construct, name: string) {
     super(scope, name);
-
+    cdk.Aspects.of(this).add({ visit: () => this.prep() });
     this.keyAlias = createEncryptionKeyName(`Secrets-Key`);
     this.encryptionKey = new kms.Key(this, `EncryptionKey`, {
       alias: `alias/${this.keyAlias}`,
@@ -80,24 +80,12 @@ export class SecretsContainer extends Construct {
         },
       }),
     );
-
-    if (this.principals.length) {
-      this.encryptionKey.addToResourcePolicy(
-        new iam.PolicyStatement({
-          actions: ['kms:Decrypt'],
-          resources: ['*'],
-          principals: this.principals,
-        }),
-      );
-    }
   }
 
   /**
    * Create a secret in the stack with the given ID and the given props.
    */
   createSecret(id: string, props: SecretsContainerProps) {
-    console.log('(((((()))))))');
-    console.log(props);
     const secret = new secrets.Secret(this, id, {
       ...props,
       // The secret needs a physical name to enable cross account sharing
@@ -117,5 +105,19 @@ export class SecretsContainer extends Construct {
 
   get alias() {
     return this.keyAlias;
+  }
+
+  protected prep(): void {
+    if (this.principals.length === 0) {
+      return;
+    }
+
+    this.encryptionKey.addToResourcePolicy(
+      new iam.PolicyStatement({
+        actions: ['kms:Decrypt'],
+        resources: ['*'],
+        principals: this.principals,
+      }),
+    );
   }
 }

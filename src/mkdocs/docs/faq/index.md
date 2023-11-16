@@ -108,7 +108,7 @@
 
     #### What if I really mess up the configuration file?
 
-    The Accelerator is designed with checks to compare your current configuration file with the version of the config file from the previous successful execution of the state machine. If we believe you are making major or breaking changes to the config file, we will purposefully fail the state machine. See [Config file and Deployment Protections](../installation/customization-index.md#config-file-and-deployment-protections) for more details.
+    The Accelerator is designed with checks to compare your current configuration file with the version of the config file from the previous successful execution of the state machine. If we believe you are making major or breaking changes to the config file, we will purposefully fail the state machine. See [Config file and Deployment Protections](../installation/customization-index.md#15-config-file-and-deployment-protections) for more details.
 
     With the release of v1.3.0 we introduced state machine scoping capabilities to further protect customers, detailed [here](../installation/sm_inputs.md).
 
@@ -609,13 +609,13 @@
 
     #### Can I deploy the solution as the account root user?
 
-    No, you cannot install as the root user. The root user has no ability to assume roles which is a requirement to configure the sub-accounts and will prevent the deployment. As per the [installation instructions](../installation/index.md#general), you require an IAM user with the `AdministratorAccess` policy attached.
+    No, you cannot install as the root user. The root user has no ability to assume roles which is a requirement to configure the sub-accounts and will prevent the deployment. As per the [installation instructions](../installation/index.md), you require an IAM user with the `AdministratorAccess` policy attached.
 
 ??? faq "1.6.9. Is the Organizational Management root account monitored similarly to the other accounts in the organization?"
 
     #### Is the Organizational Management root account monitored similarly to the other accounts in the organization?
 
-    Yes, all accounts including the Organization Management or root account have the same monitoring and logging services enabled. When supported, AWS security services like GuardDuty, Macie, and Security Hub have their delegated administrator account configured as the "security" account. These tools can be used within each local account (including the Organization Management account) within the organization to gain account level visibility or within the Security account for Organization wide visibility. For more information about monitoring and logging refer to [architecture documentation](../architectures/pbmm/logging.md).
+    Yes, all accounts including the Organization Management or root account have the same monitoring and logging services enabled. When supported, AWS security services like GuardDuty, Macie, and Security Hub have their delegated administrator account configured as the "security" account. These tools can be used within each local account (including the Organization Management account) within the organization to gain account level visibility or within the Security account for Organization wide visibility. For more information about monitoring and logging refer to [architecture documentation](../architectures/sensitive/logging.md).
 
 ??? faq "1.6.10. How are the perimeter firewall configurations and licensing managed after deployment?"
 
@@ -933,6 +933,13 @@
    The aws.sagemaker.ca-central-1.studio interface endpoint was also launched, but cannot be auto-deployed by the Accelerator at this time as it does not utilize standardized naming and requires a code update to enable deployment.
    
    Additional endpoints may exist in other AWS regions.  Any endpoint can be added to any Accelerator configuration file, as long as it follows the standardized endpoint naming convention (e.g. com.amazonaws.{region}.{service}).
+
+
+??? faq "1.6.18. How can centralized EC2 patch management be deployed?"
+
+    #### How can centralized EC2 patch management be deployed?
+
+    With Quick Setup, a capability of AWS Systems Manager, you can create patch policies powered by Patch Manager. A patch policy defines the schedule and baseline to use when automatically patching your Amazon Elastic Compute Cloud (Amazon EC2) instances and other managed nodes. This solution needs modification to deploy into the ASEA. See the guide [here](https://github.com/aws-samples/aws-secure-environment-accelerator/blob/v1.5.7/src/mkdocs/docs/guides/ssm-quick-setup-patching/ssm-quick-setup-patching-configuration.md) to learn how.
 
 ## 1.7. Network Architecture
 

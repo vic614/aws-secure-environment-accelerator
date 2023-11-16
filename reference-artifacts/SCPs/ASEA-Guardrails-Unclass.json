@@ -10,12 +10,9 @@
         "aws-marketplace:DescribePrivate*",
         "aws-marketplace:DisassociateProducts*",
         "aws-marketplace:ListPrivate*",
-        "aws-marketplace:StartPrivate*",
-        "aws-marketplace:StopPrivate*",
-        "aws-marketplace:UpdatePrivate*"
+        "aws-marketplace:Start*"
       ],
-      "Resource": "*",
-      "Condition": {}
+      "Resource": "*"
     },
     {
       "Sid": "ROOT",
@@ -27,11 +24,11 @@
         "iam:ListMFADevices",
         "iam:ListVirtualMFADevices",
         "iam:ResyncMFADevice",
-        "aws-portal:*",
         "sts:GetSessionToken",
         "iam:DeleteVirtualMFADevice",
         "trustedadvisor:*",
-        "support:*"
+        "support:*",
+        "account:*"
       ],
       "Resource": "*",
       "Condition": {
@@ -106,9 +103,7 @@
       "Effect": "Deny",
       "Action": [
         "organizations:LeaveOrg*",
-        "aws-portal:Modify*",
-        "aws-portal:ViewAccount",
-        "aws-portal:ViewPaymentMethods",
+        "organizations:CloseAccount",
         "ds:AcceptSharedDir*",
         "ds:ShareDir*",
         "ds:EnableSso",
@@ -118,10 +113,17 @@
         "ram:CreateResourceShare",
         "ram:EnableSharingWithAwsOrg*",
         "lightsail:*",
-        "sumerian:*",
         "gamelift:*",
         "appflow:*",
-        "iq:*"
+        "iq:*",
+        "account:P*",
+        "account:GetAl*",
+        "account:GetC*",
+        "account:GetR*",
+        "account:C*",
+        "account:D*",
+        "account:E*",
+        "account:L*"
       ],
       "Resource": "*",
       "Condition": {
@@ -138,7 +140,6 @@
         "ec2:AcceptTransitGateway*",
         "ec2:AssociateClientVpn*",
         "ec2:AuthorizeClientVpn*",
-        "ec2:AttachEgressOnlyInternetGateway",
         "ec2:AttachInternetGateway",
         "ec2:AttachVpnGateway",
         "ec2:CreateCarrierGateway",
@@ -203,7 +204,6 @@
         "access-analyzer:*",
         "aws-marketplace-management:*",
         "aws-marketplace:*",
-        "aws-portal:*",
         "budgets:*",
         "ce:*",
         "chime:*",
@@ -242,7 +242,15 @@
         "s3:DescribeMultiR*",
         "s3:GetMultiR*",
         "s3:ListMultiR*",
-        "s3:PutMultiR*"
+        "s3:PutMultiR*",
+        "billing:*",
+        "freetier:*",
+        "account:*",
+        "invoicing:*",
+        "payments:GetPaymentStatus",
+        "payments:ListPaymentPreferences",
+        "tax:ListTaxRegistrations",
+        "sustainability:*"
       ],
       "Resource": "*",
       "Condition": {
